@@ -4,7 +4,7 @@ import default_image from "../Assests/default_image.svg";
 
 const ImageGenerator = () => {
   const [image_url, setImage_url] = useState("/");
-  let inputRef = useRef(null);
+  const inputRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
   const imageGenerator = async () => {
@@ -18,29 +18,28 @@ const ImageGenerator = () => {
 
     try {
       const response = await fetch(
-        "https://api.openai.com/v1/images/generations",
+        "https://api.together.xyz/v1/images/generations",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer sk-sV7BVEv_Q62R1yc9e7xk8XJ2fyK1Jdcr3ZzXV3oSXvT3BlbkFJ2QA-p2CEmkmzc4-wOXAilH-U-FxOrG_j4aLjvMgoQA`,
+            Authorization: `Bearer ${import.meta.env.VITE_TOGETHER_API_KEY}`,
           },
           body: JSON.stringify({
+            model: "black-forest-labs/FLUX.1-schnell-Free",
             prompt: prompt,
-            n: 1,
-            size: "512x512",
+            width: 512,
+            height: 512,
+            num_images: 1,
+            response_format: "b64_json",
           }),
         }
       );
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
       const data = await response.json();
-      const data_array = data.data;
-
-      setImage_url(data_array[0].url);
+      const base64 = data.data[0].b64_json;
+      const imageUrl = `data:image/png;base64,${base64}`;
+      setImage_url(imageUrl);
     } catch (error) {
       console.error("Error generating image:", error);
       alert("Failed to generate image. Check the console for details.");
@@ -54,6 +53,7 @@ const ImageGenerator = () => {
       <div className="header">
         AI image <span>generator</span>
       </div>
+
       <div className="img-loading">
         <div className="image">
           <img
@@ -61,13 +61,15 @@ const ImageGenerator = () => {
             alt="AI generated"
           />
         </div>
+
         <div className="loading">
           <div className={loading ? "loading-bar-full" : "loading-bar"}></div>
           <div className={loading ? "loading-text" : "display-none"}>
-            Loading....
+            Loading...
           </div>
         </div>
       </div>
+
       <div className="search-box">
         <input
           type="text"
@@ -75,12 +77,7 @@ const ImageGenerator = () => {
           className="search-input"
           placeholder="Describe what you want to see"
         />
-        <div
-          className="generate-btn"
-          onClick={() => {
-            imageGenerator();
-          }}
-        >
+        <div className="generate-btn" onClick={imageGenerator}>
           Generate
         </div>
       </div>
