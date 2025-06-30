@@ -23,11 +23,11 @@ const ImageGenerator = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_TOGETHER_API_KEY}`,
+            Authorization: `Bearer ${process.env.REACT_APP_TOGETHER_API_KEY}`,
           },
           body: JSON.stringify({
             model: "black-forest-labs/FLUX.1-schnell-Free",
-            prompt: prompt,
+            prompt,
             width: 512,
             height: 512,
             num_images: 1,
@@ -37,9 +37,14 @@ const ImageGenerator = () => {
       );
 
       const data = await response.json();
-      const base64 = data.data[0].b64_json;
-      const imageUrl = `data:image/png;base64,${base64}`;
-      setImage_url(imageUrl);
+
+      if (data?.data?.[0]?.b64_json) {
+        const base64 = data.data[0].b64_json;
+        const imageUrl = `data:image/png;base64,${base64}`;
+        setImage_url(imageUrl);
+      } else {
+        throw new Error("Image generation failed");
+      }
     } catch (error) {
       console.error("Error generating image:", error);
       alert("Failed to generate image. Check the console for details.");
