@@ -35,6 +35,7 @@ This project is a frontend application built with React that leverages an image 
 
 ## 📸 Preview
 
-![Demo Screenshot](./c:\Users\muska\OneDrive\Pictures\Screenshots\Screenshot 2025-06-30 201310.png)
+![Demo Screenshot](./src/Components/Assests/Screenshot1.png)
+![Demo Screenshot](./src/Components/Assests/Screenshot2.png)
 
 ---
