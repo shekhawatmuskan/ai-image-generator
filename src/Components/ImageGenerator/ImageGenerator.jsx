@@ -26,7 +26,7 @@ const ImageGenerator = () => {
             Authorization: `Bearer ${process.env.REACT_APP_TOGETHER_API_KEY}`,
           },
           body: JSON.stringify({
-            model: "black-forest-labs/FLUX.1-schnell-Free",
+            model: "black-forest-labs/FLUX.1-schnell",
             prompt,
             width: 512,
             height: 512,
