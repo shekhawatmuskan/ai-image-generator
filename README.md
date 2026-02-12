@@ -1,4 +1,4 @@
-# 🎨 AI Visionary: Text-to-Image Generator
+# 🎨 AI Image Generator: Text-to-Image Generator
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![CSS](https://img.shields.io/badge/CSS-38B2AC?style=for-the-badge&logo=css&logoColor=white)
