@@ -33,7 +33,6 @@ To see the application in action, browse the snapshots below:
       <td><img src="src/Components/Assests/Screenshot3.png" width="400" alt="Landing Page"/><br/><sub><b>Result</b></sub></td>
     </tr>
   </table>
-  <p><i>(Tip: Check the <code>src/Components/Assests</code> folder to swap these with your latest UI updates!)</i></p>
 </div>
 
 ---
